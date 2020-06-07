@@ -1,4 +1,7 @@
-import os, sys
+# rgs-compiler
+# TODO: Make it easier to port to different architectures (like anyone's going to use this lol)
+
+import sys
 global strings
 
 strings = []
