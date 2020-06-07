@@ -1,5 +1,11 @@
 # rgs-compiler
 # TODO: Make it easier to port to different architectures (like anyone's going to use this lol)
+# TODO: Write a help function
+
+# Optional args:
+# --windows-newlines
+# --unix-newlines
+# --print-output
 
 import sys
 global strings
@@ -47,12 +53,14 @@ def convertLine(line):
 
 print("ReallyGoodScript Compiler")
 
-# First, we need to make sure we have all of the arguments we need.
+# Do arguments
+args = sys.argv[3:] # I refuse to learn argparse.
+
 try:
 	filename = sys.argv[1]
 	outfile = sys.argv[2]
 except:
-	print("USAGE: " + sys.argv[0] + " <input filename> <output filename>")
+	print("USAGE: " + sys.argv[0] + " <input filename> <output filename> <other arguments>")
 	exit()
 
 # We do. Load in the input file:
@@ -65,13 +73,21 @@ except:
 	exit()
 
 # Detect what kind of newlines we have.
-print("Detecting newlines...")
-if("\r\n" in fileContents): # With carriage return?
-	print("Detected Windows newlines.")
+if("--windows-newlines" in args):
 	fileContents = fileContents.split("\r\n")
-else: # Or without carriage return?
-	print("Detected *nix newlines.")
+	
+elif("--unix-newlines" in args):
 	fileContents = fileContents.split("\n")
+	
+else:
+	print("Detecting newlines...")
+	if("\r\n" in fileContents): # With carriage return?
+		print("Detected Windows newlines.")
+		fileContents = fileContents.split("\r\n")
+		
+	else: # Or without carriage return?
+		print("Detected *nix newlines.")
+		fileContents = fileContents.split("\n")
 
 # Basic header
 assembly = "BITS 16\ndisk_buffer equ 24576\n"
@@ -117,3 +133,6 @@ except:
 	exit()
 
 print("Success! Outputted assembly code to " + outfile + ".")
+
+if("--print-output" in args):
+	print(assembly)
