@@ -44,6 +44,9 @@ def convertLine(line):
 	elif(command[0] == ""):
 		assembly = ""
 	
+	elif(command[0] == "clear"):
+		assembly = "call rgs_clear"
+	
 	else:
 		print("ERROR! Bad instruction: \"" + command[0] + "\"")
 		exit()
