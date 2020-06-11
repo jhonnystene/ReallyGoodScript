@@ -1,3 +1,8 @@
+; Test RGS file!
 clear
-print@"Hello, world!"
-print@"Hello again, world!"
+print "Hello, world!"
+print "Hello again, world!"
+print "Hello, world!"
+int testint1 = 10
+long testlong1 = 12414
+string teststring1 = "OOF!"
