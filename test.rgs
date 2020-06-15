@@ -6,3 +6,4 @@ print "Hello, world!"
 int testint1 = 10
 long testlong1 = 12414
 string teststring1 = "OOF!"
+print teststring1
